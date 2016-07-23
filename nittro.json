@@ -1,0 +1,13 @@
+{
+    "files": {
+        "js": [
+            "src/js/Nittro/Routing/URLRoute.js",
+            "src/js/Nittro/Routing/DOMRoute.js",
+            "src/js/Nittro/Routing/Router.js",
+            "src/js/Nittro/Routing/Bridges/RoutingDI.js"
+        ]
+    },
+    "compat": {
+        "es5": true
+    }
+}

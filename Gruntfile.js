@@ -1,11 +1,6 @@
 module.exports = function (grunt) {
 
-    var files = [
-        'src/js/Nittro/Routing/URLRoute.js',
-        'src/js/Nittro/Routing/DOMRoute.js',
-        'src/js/Nittro/Routing/Router.js',
-        'src/js/Nittro/Routing/Bridges/RoutingDI.js'
-    ];
+    var files = grunt.file.readJSON('nittro.json').files;
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -17,7 +12,7 @@ module.exports = function (grunt) {
             },
             nittro: {
                 files: {
-                    'dist/js/nittro-routing.min.js': files
+                    'dist/js/nittro-routing.min.js': files.js
                 }
             }
         },
@@ -28,13 +23,13 @@ module.exports = function (grunt) {
             },
             nittro: {
                 files: {
-                    'dist/js/nittro-routing.js': files
+                    'dist/js/nittro-routing.js': files.js
                 }
             }
         },
 
         jasmine: {
-            src: files,
+            src: files.js,
             options: {
                 vendor: [
                     'bower_components/promiz/promiz.min.js',
