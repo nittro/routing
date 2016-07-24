@@ -7,6 +7,7 @@
             "src/js/Nittro/Routing/Bridges/RoutingDI.js"
         ]
     },
+    "di": "Nittro.Routing.Bridges.RoutingDI()",
     "compat": {
         "es5": true
     }
