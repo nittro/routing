@@ -160,18 +160,14 @@ _context.invoke('Nittro.Routing', function (DOM) {
 ;
 _context.invoke('Nittro.Routing', function (DOMRoute, URLRoute, Url) {
 
-    var Router = _context.extend('Nittro.Object', function (page, basePath) {
+    var Router = _context.extend('Nittro.Object', function (basePath) {
         Router.Super.call(this);
 
-        this._.page = page;
         this._.basePath = '/' + basePath.replace(/^\/|\/$/g, '');
         this._.routes = {
             dom: {},
             url: {}
         };
-
-        this._.page.on('setup', this._matchAll.bind(this));
-
     }, {
         getDOMRoute: function (selector) {
             if (!(selector in this._.routes.dom)) {
@@ -193,7 +189,7 @@ _context.invoke('Nittro.Routing', function (DOMRoute, URLRoute, Url) {
 
         },
 
-        _matchAll: function () {
+        matchAll: function () {
             var k, url = Url.fromCurrent();
 
             if (url.getPath().substr(0, this._.basePath.length) === this._.basePath) {
@@ -216,35 +212,4 @@ _context.invoke('Nittro.Routing', function (DOMRoute, URLRoute, Url) {
 
 }, {
     Url: 'Utils.Url'
-});
-;
-_context.invoke('Nittro.Routing.Bridges', function(Nittro) {
-
-    if (!Nittro.DI) {
-        return;
-    }
-
-    var RoutingDI = _context.extend('Nittro.DI.BuilderExtension', function(containerBuilder, config) {
-        RoutingDI.Super.call(this, containerBuilder, config)
-    }, {
-        STATIC: {
-            defaults: {
-                basePath: ''
-            }
-        },
-
-        load: function () {
-            var builder = this._getContainerBuilder(),
-                config = this._getConfig(RoutingDI.defaults);
-
-            builder.addServiceDefinition('router', {
-                factory: 'Nittro.Routing.Router()',
-                args: config,
-                run: true
-            });
-        }
-    });
-
-    _context.register(RoutingDI, 'RoutingDI');
-
 });

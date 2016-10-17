@@ -1,17 +1,13 @@
 _context.invoke('Nittro.Routing', function (DOMRoute, URLRoute, Url) {
 
-    var Router = _context.extend('Nittro.Object', function (page, basePath) {
+    var Router = _context.extend('Nittro.Object', function (basePath) {
         Router.Super.call(this);
 
-        this._.page = page;
         this._.basePath = '/' + basePath.replace(/^\/|\/$/g, '');
         this._.routes = {
             dom: {},
             url: {}
         };
-
-        this._.page.on('setup', this._matchAll.bind(this));
-
     }, {
         getDOMRoute: function (selector) {
             if (!(selector in this._.routes.dom)) {
@@ -33,7 +29,7 @@ _context.invoke('Nittro.Routing', function (DOMRoute, URLRoute, Url) {
 
         },
 
-        _matchAll: function () {
+        matchAll: function () {
             var k, url = Url.fromCurrent();
 
             if (url.getPath().substr(0, this._.basePath.length) === this._.basePath) {
