@@ -26,7 +26,14 @@ _context.invoke('Nittro.Routing.Bridges.RoutingDI', function(Nittro) {
             if (builder.hasServiceDefinition('snippetManager')) {
                 builder.getServiceDefinition('snippetManager')
                     .addSetup(function(router) {
-                        this.on('after-update', router.matchAll.bind(router));
+                        this.on('after-update', router.matchDOM.bind(router));
+                    });
+            }
+
+            if (builder.hasServiceDefinition('history')) {
+                builder.getServiceDefinition('history')
+                    .addSetup(function (router) {
+                        this.on('savestate popstate', router.matchURL.bind(router));
                     });
             }
         }

@@ -189,22 +189,38 @@ _context.invoke('Nittro.Routing', function (DOMRoute, URLRoute, Url) {
 
         },
 
-        matchAll: function () {
+        matchDOM: function () {
+            for (var k in this._.routes.dom) {
+                if (this._.routes.dom.hasOwnProperty(k)) {
+                    this._.routes.dom[k].match();
+
+                }
+            }
+
+            return this;
+        },
+
+        matchURL: function () {
             var k, url = Url.fromCurrent();
 
             if (url.getPath().substr(0, this._.basePath.length) === this._.basePath) {
                 url.setPath(url.getPath().substr(this._.basePath.length));
 
                 for (k in this._.routes.url) {
-                    this._.routes.url[k].match(url);
+                    if (this._.routes.url.hasOwnProperty(k)) {
+                        this._.routes.url[k].match(url);
 
+                    }
                 }
             }
 
-            for (k in this._.routes.dom) {
-                this._.routes.dom[k].match();
+            return this;
+        },
 
-            }
+        matchAll: function () {
+            this.matchURL();
+            this.matchDOM();
+            return this;
         }
     });
 
