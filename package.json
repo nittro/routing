@@ -10,5 +10,10 @@
         "url": "https://github.com/nittro/routing/issues",
         "email": "nittro@nittro.org"
     },
-    "devDependencies": {}
+    "dependencies": {
+        "nittro-core": "master"
+    },
+    "devDependencies": {
+        "nittro-di": "master"
+    }
 }
